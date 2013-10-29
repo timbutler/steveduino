@@ -9,8 +9,8 @@
 // Variables
 // -----------------------
 
-int pirInputPin = 5;
-int ledOutputPin = 13;
+int pirInputPin = 3;
+int ledOutputPin = 9;
 int pirState = LOW;
 int startDelay = 3 * 1000;
 int retriggerDelay = 20 * 1000;
@@ -19,7 +19,6 @@ int retriggerDelay = 20 * 1000;
 void startupDelay() {
   delay (startDelay);
 }
-
 
 
 void ledStartup() {
@@ -38,12 +37,14 @@ void ledStartup() {
   analogWrite(ledOutputPin, 0);         
 }
 
+
 void ledFadeIn() {
   for(int fadeValue = 0 ; fadeValue <= 255; fadeValue +=5) { 
     analogWrite(ledOutputPin, fadeValue);         
     delay(5);
   }
 }
+
 
 void ledFadeOut() {
   for(int fadeValue = 255 ; fadeValue >= 0; fadeValue -=5) { 
@@ -80,18 +81,13 @@ void setup() {
 }
 
 void loop() {
-
   if(digitalRead(pirInputPin) == LOW){ 
        analogWrite(ledOutputPin, 0); 
-    Serial.println("I'm low :(");
   }
   else {
     analogWrite(ledOutputPin, 255);
     freakyEyes();
     delay(2000);
   }
-  
-  //int inputVal = digitalRead(pirInputPin);
-  //Serial.println(inputVal);
   delay(500);        // delay in between reads for stability
 }
